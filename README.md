@@ -1,2 +1,2 @@
 # umlS23
-devops sping23 course
+developer ops sping23 course
