@@ -1,3 +1,32 @@
+Skip to content
+Search or jump to…
+Pulls
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@vgrenn 
+umlDevOps
+/
+umlS23
+Public
+Fork your own copy of umlDevOps/umlS23
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+umlS23/week7/Jenkinsfile
+@umlDevOps
+umlDevOps Update Jenkinsfile
+Latest commit 4e49ff0 last week
+ History
+ 1 contributor
+68 lines (66 sloc)  1.8 KB
+
 podTemplate(yaml: '''
     apiVersion: v1
     kind: Pod
@@ -37,11 +66,11 @@ podTemplate(yaml: '''
 ''') {
   node(POD_LABEL) {
     stage('Build a gradle project') {
-      git 'https://github.com/umldevops/Continuous-Delivery-with-Docker-and-Jenkins-Second-Edition.git'
+      git 'https://github.com/vgrenn/Continuous-Delivery-with-Docker-and-Jenkins-Second-Edition.git'
       container('gradle') {
         stage('Build a gradle project') {
           sh '''
-          cd /var/jenkins_home/workspace/week7rightone@script/64ad39e6fb4b08075f22da7fd71e8ffa47153cffd43c3a18e4b0b303e40a23a9
+          cd /home/jenkins/agent/workspace/week7-1/Chapter08/sample1
           chmod +x gradlew
           ./gradlew build
           mv ./build/libs/calculator-0.0.1-SNAPSHOT.jar /mnt
@@ -58,7 +87,7 @@ podTemplate(yaml: '''
           echo 'COPY ./calculator-0.0.1-SNAPSHOT.jar app.jar' >> Dockerfile
           echo 'ENTRYPOINT ["java", "-jar", "app.jar"]' >> Dockerfile
           mv /mnt/calculator-0.0.1-SNAPSHOT.jar .
-          /kaniko/executor --context `pwd` --destination umldevops23/hello-kaniko:1.0
+          /kaniko/executor --context `pwd` --destination vgrenn/hello-kaniko:1.0
           '''
         }
       }
